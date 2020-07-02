@@ -73,6 +73,7 @@ $(document).ready(() => {
                 body: JSON.stringify(data),
             }).then(response => {
                 // location.replace("http://127.0.0.1:5000/diagnostics")
+                location.reload()
             })
 
 
