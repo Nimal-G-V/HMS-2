@@ -1,0 +1,6 @@
+
+table.table th,
+table.table td {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}

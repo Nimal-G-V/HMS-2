@@ -1,0 +1,177 @@
+{% extends "base.html" %} {% block content %}
+<main id="main">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-2 text-center mt-2 mb-2">
+                <h5><strong>Pharmacy</strong></h5>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-9">
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+                    <table class="table table-bordered table-striped mb-0">
+                        <thead style="background-color: black;color: white;">
+                            <tr>
+                                <th scope="col">Patient Id</th>
+
+                                <th scope="col">Name</th>
+                                <th scope="col">Age</th>
+                                <th scope="col" style="text-align: center;">Patient Address</th>
+
+                                <th scope="col">DOA</th>
+                                <th scope="col">Type of BED</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <form class="form-inline justify-content-center" action="" method="POST">
+                                        {{ form.hidden_tag() }} {{ form.get_id(class_="form-control form-control-sm mr-1 w-10") }}
+                                        <!-- <input class="form-control form-control-sm mr-1 w-10" type="text" placeholder="Search" aria-label="Search"> -->
+                                        {{form.get(class_="button" )}}
+                                        <!-- <button type="submit" class="button-normal"><i class="fa fa-search"></i></button> -->
+                                    </form>
+
+                                </td>
+                                {% if got_details %}
+
+
+                                <td>{{ patient_data.patient_name }}</td>
+                                <td>{{ patient_data.patient_age }}</td>
+
+                                <td>{{ patient_data.patient_address }}</td>
+                                <td>{{ patient_data.patient_DOA }}</td>
+
+                                <td>{{ patient_data.patient_city }}</td>
+                                {% else %}
+                                <td>
+                                    _
+                                </td>
+                                <td>
+                                    _
+                                </td>
+                                <td>
+                                    _
+                                </td>
+                                <td>
+                                    _
+                                </td>
+                                <td>
+                                    _
+                                </td>
+                                {% endif %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if got_details %} {% if medicine_data %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-2 text-center mt-2 mb-2">
+                <h5><strong>Medicine Issued</strong></h5>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-sm-9">
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                    <table class="table table-bordered table-striped mb-0">
+                        <thead style="background-color: black;color: white;">
+                            <tr>
+                                <th scope="col">Medicine</th>
+
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Rate</th>
+
+                                <th scope="col">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in medicine_data %}
+                            <tr>
+                                <td>{{ data.medicine.medicine_name }}</td>
+                                <td>{{ data.medicine.medicine_quantity }}</td>
+                                <td>{{ data.medicine.medicine_rate }}</td>
+                                <td>{{ data.medicine.medicine_total_amount }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        {% else %}
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-6 text-center mt-3 mb-3">
+                    <h6><strong>No medicine details found for this patient.</strong></h6>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="row justify-content-center">
+                <div class="col-sm-2 text-center mt-2 mb-2">
+                    <h5><strong>Add Medicines</strong></h5>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-sm-9">
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                        <table class="table table-bordered table-striped mb-0" id="myTable">
+                            <thead style="background-color: black;color: white;">
+                                <tr>
+                                    <th scope="col">Medicine</th>
+
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Rate</th>
+
+                                    <th scope="col">Amount</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                            <tfoot>
+                                <tr>
+                                    <td style="width: 150px;">
+                                        <input class="form-control form-control-sm  w-10" type="text" id="mname" placeholder="Medicine" aria-label="Name">
+                                    </td>
+                                    <td style="width: 100px;">
+                                        <input class="form-control form-control-sm  w-10" type="number" id="qty" placeholder="Qunatity" aria-label="Quantity">
+                                    </td>
+                                    <td style=" width: 100px;">
+                                        <input class="form-control form-control-sm  w-10" type="number" id="rate" placeholder="Rate" aria-label="Rate">
+                                    </td>
+                                    <td style="width: 100px;">
+                                        <div id="amount"></div>
+                                    </td>
+                                    <td style="width: 120px;">
+                                        <button class="btna btn-primary" id="addRow">Add</button>
+                                    </td>
+
+                                </tr>
+                            </tfoot>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-sm-3 mt-4 text-center">
+                    <button class="btn btn-primary" id="update">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</main>
+<script type="text/javascript" src="{{ url_for('static', filename='js/pharmacy.js') }}"></script>
+
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-sm-8">
+            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+                <table class="table table-bordered table-striped mb-0">
+                    <thead style="background-color: black;color: white;">
+                        <tr>
+                            <th scope="col">Patient Id</th>
+                            <th scope="col">SSN ID</th>
+                            <th scope="col">Patient Name</th>
+                            <th scope="col">Age</th>
+                            <th scope="col" style="text-align: center;">Patient Address</th>
+                            <th scope="col" style="text-align: center;">Patient City</th>
+                            <th scope="col" style="text-align: center;">Patient State</th>
+                            <th scope="col">DOA</th>
+                            <th scope="col">Type of BED</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for patient in patients %}
+                        <tr>
+                            <th>{{ patient.patient_id }}</th>
+                            <td>{{ patient.patient_ssn_id }}</td>
+                            <td>{{ patient.patient_name }}</td>
+                            <td>{{ patient.patient_age }}</td>
+                            <td style="text-align: center;">{{ patient.patient_address}}</td>
+                            <td style="text-align: center;">{{ patient.patient_city}}</td>
+                            <td style="text-align: center;">{{ patient.patient_state}}</td>
+                            <td>{{ patient.patient_DOA }}</td>
+                            <td>{{ patient.patient_type_of_bed }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

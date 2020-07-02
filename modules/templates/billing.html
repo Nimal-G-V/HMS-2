@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.get_id.label }}
+            {{ form.get_id }}
+        </div><br>
+        <div>
+            {{ form.get }}
+        </div>
+    </form>
+    {% if got_details %}
+    {% if patient_data %}
+    <div>
+        <br>
+        <h3 style="text-align: center;">Patient Details</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Patient ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>State</th>
+                    <th>City</th>
+                    <th>Type of Room</th>
+                    <th>Admission Date</th>
+                    <th>Discharge Date</th>
+                    <th>No.of.Days</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ patient_data.patient_id }}</td>
+                    <td>{{ patient_data.patient_name }}</td>
+                    <td>{{ patient_data.patient_age }}</td>
+                    <td>{{ patient_data.patient_state }}</td>
+                    <td>{{ patient_data.patient_city }}</td>
+                    <td>{{ patient_data.patient_type_of_bed }}</td>
+                    <td>{{ patient_data.patient_DOA }}</td>
+                    <td>{{ day_of_discharge }}</td>
+                    <td>{{ no_of_days }}</td>
+                </tr>
+                <tr>
+                    <td colspan="8">Room rent</td>
+                    <td>{{ room_rent }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br><br>
+    </div>
+    <div>
+    {% if medicine_data %}
+        <h3 style="text-align: center;">Medicine Details</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Medicine Name</th>
+                    <th>Quantity</th>
+                    <th>Rate (Rs.)</th>
+                    <th>Total (Rs.)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in medicine_data %}
+                <tr>
+                    <td>{{ data.medicine.medicine_name }}</td>
+                    <td>{{ data.medicine.medicine_quantity }}</td>
+                    <td>{{ data.medicine.medicine_rate }}</td>
+                    <td>{{ data.medicine.medicine_total_amount }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="3">Total:</td>
+                    <td >{{ medicine_total }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        {% else %}
+        <h3 style="text-align: center;">No medicine details found for this patient.</h3>
+        <br>
+        {% endif %}
+    </div><br>
+    <div>
+    {% if diagnosis_data %}
+        <h3 style="text-align: center;">Diagnosis Details</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Diagnosis Name</th>
+                    <th>Amount (Rs.)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in diagnosis_data %}
+                <tr>
+                    <td>{{ data.diagnosis.test_name }}</td>
+                    <td>{{ data.diagnosis.test_amount }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td>Total:</td>
+                    <td>{{ diagnosis_total }}</td>
+                </tr>
+            </tbody>
+        </table>
+        {% else %}
+        <h3 style="text-align: center;">No diagnostics details found for this patient.</h3>
+        {% endif %}
+    </div><br>
+    {% endif %}
+    <table>
+        <tr>
+            <td>Grand Total: </td>
+            <td>Rs. {{ grand_total }}</td>
+        </tr>
+    </table>
+    <input type="hidden" id="patient-id" value="{{ patient_data.patient_id }}">
+    <input type="hidden" id="patient-discharge" value="{{ day_of_discharge }}">
+    <input type="hidden" id="grand-total" value="{{ grand_total }}">
+    <button type="button" id="discharge">Confirm</button>
+    {% endif %}
+</div>
+<script type="text/javascript" src="{{ url_for('static', filename='js/billing.js') }}" ></script>
+{% endblock %}

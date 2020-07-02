@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.get_id.label }}
+            {{ form.get_id }}
+        </div><br>
+        <div>
+            {{ form.get }}
+        </div>
+    {% if got_details %}
+    <div id="add-update">
+        <br>
+        <h3 style="text-align: center;">Patient Details</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Patient ID</th>
+                    <th>SSN ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Admission Date</th>
+                    <th>Address</th>
+                    <th>State</th>
+                    <th>City</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ patient_data.patient_id }}</td>
+                    <td>{{ patient_data.patient_ssn_id }}</td>
+                    <td>{{ patient_data.patient_name }}</td>
+                    <td>{{ patient_data.patient_age }}</td>
+                    <td>{{ patient_data.patient_DOA }}</td>
+                    <td>{{ patient_data.patient_address }}</td>
+                    <td>{{ patient_data.patient_state }}</td>
+                    <td>{{ patient_data.patient_city }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br><br><br>
+        {% if diagnosis_data %}
+        <h3 style="text-align: center;">Diagnosis Details</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Diagnosis Name</th>
+                    <th>Amount (Rs.)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in diagnosis_data %}
+                <tr>
+                    <td>{{ data.diagnosis.test_name }}</td>
+                    <td>{{ data.diagnosis.test_amount }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        </form>
+        <button type="button" id="add-daignosis" onclick="addOneMoreFeild()">Add Diagnosis</button>
+        {% else %}
+        <h3 style="text-align: center;">No diagnostics details found for this patient.</h3>
+        <br>
+        </form>
+        <button type="button" id="add-daignosis" onclick="addOneMoreFeild()">Add Diagnosis</button>
+        {% endif %}
+        <br>
+        <div id="add-input-feilds">
+            <table class="table" id="insert-inside">
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
+<script src="{{ url_for('static', filename='js/script4.js')}}"></script>
+{% endblock %}

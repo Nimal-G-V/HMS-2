@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block content %}
+        <div class="row justify-content-center">
+            <div class="col-sm-8">
+                <div class="card card-cascade wider mt-4">
+                    <div class="card-body ">
+                        <h4 class="card-title" style="text-align: center;"><strong>Are you sure you want to permanently remove this record?</strong></h4>
+                        <div class="row">
+                            <div class="col-sm-6 mt-4">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        ID :
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ patient.patient_id }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt-4">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        Name :
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ patient.patient_name }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt-4">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        SSN ID :
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ patient.patient_ssn_id }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt-4">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        BedType :
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ patient.patient_type_of_bed }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt-4">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        DOA :
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ patient.patient_DOA }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt-4">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        City :
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ patient.patient_city }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 mt-4">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        State :
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ patient.patient_state }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt-4">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        Address :
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ patient.patient_address }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br><br>
+                        <div class="row justify-content-center">
+                            <div class="col-sm-6 " style="text-align: center;">
+                                <form action="" method="POST">
+                                    <input type="hidden" name="pid" value="{{ patient.patient_id }}">
+                                    {{ form.yes(class="btn btn-danger btn-rounded") }}
+                                    {{ form.no(class="btn btn-success btn-rounded") }}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
